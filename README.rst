@@ -91,11 +91,6 @@ There is a simple higher level function to help in producing simple pie charts.
          file_.write(example3_html_code)
 
 
-   This will produce a html page with a chart like the one below
-
-   .. image:: img/simple_pie_chart.png
-
-
 Simple Bar Chart
 ++++++++++++++++
 
@@ -146,11 +141,6 @@ There is a simple higher level function to help in producing simple bar charts.
 
       with open('example4__simple_bar_chart.html', 'w') as file_:
          file_.write(example4_html_code)
-
-
-   This will produce a html page with a chart like the one below
-
-   .. image:: img/simple_bar_chart.png
 
 
 Code Examples
