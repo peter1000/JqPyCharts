@@ -1,0 +1,16 @@
+xxxx-xx-xx    1.0.1
+-------------------
+   * FIXED ERRORS:
+   * NEW ADDED:
+   * UPDATED, IMPROVEMENTS:
+   * REMOVED:
+   * DOCUMENTATION:
+   * OTHER CHANGES:
+
+2014-07-14    1.0.0
+-------------------
+   * Release v. 1.0.0
+
+2014-07-02
+-------------------
+   * project start
