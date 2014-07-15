@@ -43,7 +43,7 @@ Simple Pie Chart
 
 There is a simple higher level function to help in producing simple pie charts.
 
-.. seealso:: `development source: Example3.py`
+seealso `development source: Example3.py`
 
 - Define some html template
 
@@ -96,7 +96,7 @@ Simple Bar Chart
 
 There is a simple higher level function to help in producing simple bar charts.
 
-.. seealso:: `development source: Example3.py`
+seealso `development source: Example3.py`
 
 - Define some html template
 
