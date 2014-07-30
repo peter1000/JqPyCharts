@@ -514,9 +514,9 @@ def jqpc_simple_bar_chart(
       tuple: js_css_resources_header, jqplotchart_script, html_chart_insert_tag
    """
    if chart_x_label_fontdict is None:
-      chart_x_label_fontdict = {'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'},
+      chart_x_label_fontdict = {'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'}
    if chart_ticks_fontdict is None:
-      chart_ticks_fontdict = {'fontFamily': 'Courier New', 'fontSize': 12, 'textColor': '#000000'},
+      chart_ticks_fontdict = {'fontFamily': 'Courier New', 'fontSize': 12, 'textColor': '#000000'}
 
    chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in chart_data_matrix]
    if None in chart_legends:
@@ -585,11 +585,11 @@ def jqpc_simple_bar_chart(
                   renderer: $.jqplot.CategoryAxisRenderer,
                   tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                   ticks: chart_ticks,
-                  tickOptions: {""")
+                  tickOptions: {""")   
    jqplot_options_lines.append("""
-                     fontFamily:'{fontFamily}',
-                     fontSize: '{fontSize}pt',
-                     textColor : '{textColor}',""".format(chart_ticks_fontdict['fontFamily'], chart_ticks_fontdict['fontSize'], chart_ticks_fontdict['textColor']))
+                     fontFamily:'{}',
+                     fontSize: '{}pt',
+                     textColor : '{}',""".format(chart_ticks_fontdict['fontFamily'], chart_ticks_fontdict['fontSize'], chart_ticks_fontdict['textColor']))
    jqplot_options_lines.append("""
                   },
                },

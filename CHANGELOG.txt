@@ -1,11 +1,10 @@
-xxxx-xx-xx    1.0.1
--------------------
-   * FIXED ERRORS:
-   * NEW ADDED:
-   * UPDATED, IMPROVEMENTS:
-   * REMOVED:
-   * DOCUMENTATION:
-   * OTHER CHANGES:
+Version 1.0.1     2014-07-30
+----------------------------
+
+Fixes/Improvements:
+
+   * Fixed Error in: JqPyCharts Simple Bar Chart
+
 
 2014-07-14    1.0.0
 -------------------
