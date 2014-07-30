@@ -17,8 +17,8 @@
 
       __author__ `str` -
 """
-__version__ = '1.0.0'
-RELEASE_DATE = '2014.07.14'
+__version__ = '1.0.1'
+RELEASE_DATE = '2014.07.30'
 SHORT_VERSION = __version__.rsplit('.', 1)[0]
 
 TESTED_HOST_OS = 'Linux Ubuntu 13.10'
