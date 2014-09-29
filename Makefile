@@ -2,103 +2,120 @@
 
 PYTHON=/usr/bin/env python3
 
-.PHONY: help cleanall clean tests tests_cover build dist install docs zip_docs, info check_setup pypiupload pypiregister
+PACKAGE = JqPyCharts
 
+.PHONY: help clean_docs clean cleanall clean_force_exclude_files tests tests_cover docs build_force install install_develop uninstall_develop dist pypi_all check_setup init_versioneer code_analysis_pylint
 
 help:
 	@echo 'Please use: `make <target>` where <target> is one of'
-	@echo '  cleanall       to clean inclusive generated documentation: docs.'
-	@echo '  clean          to clean but keep any generated documentation: docs.'
-	@echo '  tests          to test the project'
-	@echo '  tests_cover    to test the project and produce a coverage report: dir cover'
-	@echo '  build          to build the project'
-	@echo '  install        to install the package'
-	@echo '  dist           to build a source distribution tar file'
-	@echo '  docs           to build the docs for the project'
-	@echo '  zip_docs       generate a zip file of the docs: e.g. to upload to pypi'
-	@echo '  info           to build the general info'
-	@echo '  check_setup    checks the setup.py file'
-	@echo '  pypiupload     builds a release and uploads it to pypi'
-	@echo '  pypiregister   register/submit your distribution’s meta-data to the pypi index'
+	@echo '  clean_docs                 removes only: `build/sphinx`'
+	@echo '  clean                      clean: FILES:`.coverage, MANIFEST, *.pyc, *.pyo, *.pyd, *.o, *.orig` and DIRS: `*.__pycache__`'
+	@echo '  cleanall                   clean PLUS remove: DIRS: `build, dist, cover, *._pyxbld, *.egg-info` and FILES in MAIN_PACKAGE_PATH: `*.so, *.c`'
+	@echo '  clean_force_exclude_files  clean PLUS remove: any FILES in 'setup.py' `CleanCommand.exclude_files`'
+	@echo '  tests                      test the project build any extensions before'
+	@echo '  tests_cover                test with coverage report: dir cover'
+	@echo '  docs                       build the docs for the project'
+	@echo '  build_force                build the project: force re-generation of all cython .c files and compile all extension'
+	@echo '  install                    force re-compile and install the package'
+	@echo '  install_develop            install the package in:development-mode'
+	@echo '  uninstall_develop          uninstall the package: development-mode'
+	@echo '  dist                       force re-compile and build a source distribution tar file'
+	@echo '  pypi_all                   force re-compile and re-register/upload (inclusive docs) to pypi'
+	@echo '  check_setup                checks the setup.py file'
+	@echo '  init_versioneer            inti versioneer for the project'
+	@echo '  code_analysis_pylint       pylint the project: ends always with an makefile error?'
 
-
-cleanall: clean
-	@rm -rf build dist cover zipped_docs
-	@rm -rf docs/JqPyCharts-DOCUMENTATION
-	@rm -rf info/GENERAL-INFO
-	@rm -rf docs/source/JqPyCharts.rst docs/source/modules.rst
+clean_docs:
+	${PYTHON} setup.py clean --onlydocs
+	@echo -e '\n=== finished clean_docs'
 
 clean:
-	@find . -iname '__pycache__' |xargs rm -rf
-	@find . -iname '*.egg-info' |xargs rm -rf
-	@find . -iname '*.pyc' |xargs rm -rf
-	@rm -rf MANIFEST .coverage
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished clean'
 
-tests: clean
+cleanall:
+	${PYTHON} setup.py clean --all
+	@echo -e '\n=== finished cleanall'
+
+clean_force_exclude_files:
+	${PYTHON} setup.py clean --excludefiles
+	@echo -e '\n=== finished clean_force_exclude_files'
+
+tests:
+	${PYTHON} setup.py clean
 	${PYTHON} setup.py nosetests
-	$(MAKE) clean
+	${PYTHON} setup.py clean
 	@echo -e '\n=== finished tests'
 
-tests_cover: clean
-	@rm -rf cover
+tests_cover:
+	${PYTHON} setup.py clean
 	${PYTHON} setup.py nosetests --cover-branches --with-coverage --cover-html --cover-erase --cover-package=JqPyCharts
-	$(MAKE) clean
+	${PYTHON} setup.py clean
 	@echo -e '\n=== finished tests_cover'
 
-build: clean
-	rm -rf build
-	${PYTHON} setup.py build
-	$(MAKE) clean
-	@echo -e '\n=== finished build'
-
-dist: cleanall
-	${PYTHON} setup.py sdist
-	$(MAKE) clean
-	@echo -e '\n=== finished dist'
-
-install: clean
-	rm -rf build
-	${PYTHON} setup.py install
-	$(MAKE) clean
-	@echo -e '\n=== finished install'
-
 docs:
-	rm -rf docs/JqPyCharts-DOCUMENTATION
-	sphinx-apidoc --force --output-dir=docs/source JqPyCharts
-	cd docs && make html
-	cd ..
-	$(MAKE) clean
+	${PYTHON} setup.py clean --onlydocs
+	${PYTHON} setup.py build_sphinx -E
+	${PYTHON} setup.py clean
 	@echo -e '\n=== finished docs'
 
-zip_docs: docs
-	rm -rf zipped_docs
-	mkdir zipped_docs
-	cd docs/JqPyCharts-DOCUMENTATION/html && zip -r ../../../zipped_docs/docs_html_JqPyCharts.zip *
-	cd ..
-	$(MAKE) clean
-	@echo -e '\n=== finished zip_docs'
+build_force:
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py build --force
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished build_force'
 
-info:
-	rm -rf info/GENERAL-INFO
-	cd info && make html
-	cd ..
-	$(MAKE) clean
-	@echo -e '\n=== finished info'
+install:
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py build --force
+	${PYTHON} setup.py install
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished install'
 
-check_setup: clean
-	${PYTHON} setup.py check
-	$(MAKE) clean
-	@echo -e '\n=== finished check_setup'
+install_develop:
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py develop --exclude-scripts
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished install_develop'
 
-pypiupload: cleanall
-	${PYTHON} setup.py check
-	${PYTHON} setup.py sdist upload
-	$(MAKE) clean
-	@echo -e '\n=== finished pypiupload'
+uninstall_develop:
+	${PYTHON} setup.py develop --uninstall
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished uninstall_develop'
 
-pypiregister: cleanall
+dist:
+# just to make sure it compiles
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py build_ext --inplace --force
+# do it
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py sdist
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished dist'
+
+pypi_all:
+# just to make sure it compiles
+	${PYTHON} setup.py clean --all
+	${PYTHON} setup.py build_ext --inplace --force
+# do it
+	${PYTHON} setup.py clean --all
 	${PYTHON} setup.py check
 	${PYTHON} setup.py register
-	$(MAKE) clean
-	@echo -e '\n=== finished pypiregister'
+	${PYTHON} setup.py sdist upload
+	${PYTHON} setup.py build_sphinx upload_docs
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished pypi_all'
 
+check_setup:
+	${PYTHON} setup.py clean
+	${PYTHON} setup.py check
+	${PYTHON} setup.py clean
+	@echo -e '\n=== finished check_setup'
+
+init_versioneer:
+	${PYTHON} setup.py versioneer
+	@echo -e '\n=== finished init_versioneer'
+
+code_analysis_pylint:
+	pylint -f colorized JqPyCharts
+	@echo -e '\n=== finished code_analysis_pylint'

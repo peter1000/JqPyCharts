@@ -1,46 +1,68 @@
-Except where noted below, **JqPyCharts** is released under the
-following terms: `The BSD 3-Clause License`
-http://opensource.org/licenses/BSD-3-Clause
+=====================
+Copyrights & Licenses
+=====================
 
-(c) 2014, `peter1000` https://github.com/peter1000
-All rights reserved.
+License for JqPyCharts
+======================
+Except where noted below, **JqPyCharts** is released under the following terms:
+`BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>`_:
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+   *JqPyCharts*
 
-   Redistributions of source code must retain the above copyright notice,
-       this list of conditions and the following disclaimer.
-       
-   Redistributions in binary form must reproduce the above copyright notice,
-      this list of conditions and the following disclaimer in the documentation
-      and/or other materials provided with the distribution.
-      
-   Neither the name of the copyright holder nor the names of its
-      contributors may be used to endorse or promote products derived from
-      this software without specific prior written permission.
+   (c) 2014, `peter1000` https://github.com/peter1000
+   All rights reserved.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
-AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
-THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions are met:
+
+      - Redistributions of source code must retain the above copyright notice,
+          this list of conditions and the following disclaimer.
+
+      - Redistributions in binary form must reproduce the above copyright notice,
+         this list of conditions and the following disclaimer in the documentation
+         and/or other materials provided with the distribution.
+
+      - Neither the name of the copyright holder nor the names of its
+         contributors may be used to endorse or promote products derived from
+         this software without specific prior written permission.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+   THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+   PURPOSE ARE DISCLAIMED.
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
+   DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+   LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+   AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
+   THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-**Exceptions**
+Licenses for incorporated software
+==================================
+Other licenses can be found in the LICENSES directory.
 
-- `jqPlot <https://bitbucket.org/cleonello/jqplot>`_  (Copyright (c) Chris Leonello)
+**JqPyCharts** contains some code derived from the following sources:
 
-   jqPlot is an open source project dual licensed under the MIT and GPL version 2 licenses. 
+
+versioneer.py
+-------------
+is in Public Domain
+
+
+jqPlot
+------
+*JqPyCharts* uses parts of `jqPlot <https://bitbucket.org/cleonello/jqplot>`_ v1.0.8r1250.
+
+- (Copyright (c) 2009-2013 Chris Leonello)
+- jqPlot is an open source project dual licensed under the MIT and GPL version 2 licenses. 
    You are free to choose the license that best suits your project.
-   
-   see JqPyCharts: `jqPlot_copyright.txt` or the original `jqPlot <https://bitbucket.org/cleonello/jqplot>`_  web page
-   
-- `jquery <https://jquery.org/license/>`_  MIT license. (Copyright (c) jQuery Foundation, Inc.)
 
 
+jquery
+------
+`jQuery <https://jquery.org/license/>`_ v1.9.1
+
+- (Copyright (c) jQuery Foundation, Inc.)
+- `MIT license. <http://opensource.org/licenses/MIT>`_
