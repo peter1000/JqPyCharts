@@ -16,9 +16,13 @@ Required Software
 
    - `<http://www.python.org/>`_
 
-- setuptools >= 6.0.1
+- setuptools >= 6.0.2
 
    - `<http://pythonhosted.org/setuptools/>`_
+
+- Cython >= 0.21
+
+   - `<http://cython.org/>`_
 
 
 - nose >= 1.3.4  (for tests)
@@ -29,7 +33,7 @@ Required Software
 
    - `<http://nedbatchelder.com/code/coverage>`_
 
-- PSphinxTheme >=1.3.4  (for documentation generation)
+- PSphinxTheme >=2.0.0  (for documentation generation)
 
    - `<https://github.com/peter1000/PSphinxTheme>`_
 
@@ -37,7 +41,7 @@ Required Software
 Additional Recommended Software Python
 ======================================
 
-- PySpeedIT >=1.0.6  (A collection of: Benchmark-IT, Profile-IT, Line-Memory-Profile-IT, Disassemble-IT.)
+- PySpeedIT >=1.0.7  (A collection of: Benchmark-IT, Profile-IT, Line-Memory-Profile-IT, Disassemble-IT.)
 
    - `<https://github.com/peter1000/PySpeedIT>`_
 

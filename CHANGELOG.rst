@@ -4,6 +4,16 @@ Release History
 
 .. _whats-new:
 
+Version 2.0.1     2014-10-01
+============================
+
+Fixes/Other Changes:
+--------------------
+
+   - updated requirement: PSphinxTheme>=2.0.0
+   - Required Software: setuptools >= 6.0.2, PySpeedIT >=1.0.7
+
+
 Version 2.0.0     2014-09-29
 ============================
 
@@ -23,7 +33,7 @@ Features:
    - added option for 'horizontal bar charts'
    - added `highlighter` to bar charts
 
-   
+
 Fixes/Other Changes:
 --------------------
 
