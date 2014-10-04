@@ -20,10 +20,6 @@ Required Software
 
    - `<http://pythonhosted.org/setuptools/>`_
 
-- Cython >= 0.21
-
-   - `<http://cython.org/>`_
-
 |
 
 - nose >= 1.3.4  (for tests)
@@ -41,6 +37,10 @@ Required Software
 
 Additional Recommended Software Python
 ======================================
+
+- Cython >= 0.21
+
+   - `<http://cython.org/>`_
 
 - PySpeedIT >=1.0.8  (A collection of: Benchmark-IT, Profile-IT, Line-Memory-Profile-IT, Disassemble-IT.)
 
