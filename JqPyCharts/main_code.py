@@ -752,8 +752,6 @@ def jqpc_simple_bar_chart(
    :return: (tuple) js_css_resources_header, jqplotchart_script, html_chart_insert_tag
    :raise Err:
    """
-
-   print('\n\n========jqpc_simple_bar_chart: source_dir_path: <{}>'.format(source_dir_path))
    if chart_x_label_fontdict is None:
       chart_x_label_fontdict = {'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'}
    if chart_ticks_fontdict is None:
