@@ -51,11 +51,12 @@ def test_jqpc_get_html_js_css_resources_ok1():
       'jqplot.highlighter.min.js',
    ]
    out_js_css_resources = jqpc_get_html_js_css_resources(
-      needed_resources, 
-      source_scripts_path, 
+      needed_resources,
+      source_scripts_path,
       path_relpath(source_scripts_path),
       indent='      '
    )
+
 
 # noinspection PyUnusedLocal
 def test_jqpc_get_html_js_css_resources_ok2():
@@ -73,11 +74,12 @@ def test_jqpc_get_html_js_css_resources_ok2():
       'jqplot.highlighter.min.js',
    ]
    out_js_css_resources = jqpc_get_html_js_css_resources(
-      needed_resources, 
-      source_scripts_path, 
+      needed_resources,
+      source_scripts_path,
       path_abspath(source_scripts_path),
       indent='      '
    )
+
 
 # noinspection PyUnusedLocal
 @nose_raises(Err)
@@ -96,8 +98,8 @@ def test_jqpc_get_html_js_css_resources__expect_failure1():
       'wrong_resource_name',
    ]
    out_js_css_resources = jqpc_get_html_js_css_resources(
-      needed_resources, 
-      source_scripts_path, 
+      needed_resources,
+      source_scripts_path,
       path_relpath(source_scripts_path),
       indent='      '
    )
@@ -120,18 +122,18 @@ def test_jqpc_get_html_js_css_resources__expect_failure2():
       'wrong_ending.wrong',
    ]
    out_js_css_resources = jqpc_get_html_js_css_resources(
-      needed_resources, 
-      source_scripts_path, 
+      needed_resources,
+      source_scripts_path,
       path_relpath(source_scripts_path),
       indent='      '
    )
 
 
 # noinspection PyPep8
-def test_jqpc_get_html_chart_div_ok():
-   """ Tests: test_jqpc_get_html_chart_div_ok
+def test_jqpc_get_html_chart_div_ok1():
+   """ Tests: test_jqpc_get_html_chart_div_ok1
    """
-   print('::: TEST: test_jqpc_get_html_chart_div_ok()')
+   print('::: TEST: test_jqpc_get_html_chart_div_ok1()')
 
    chart_id = 1
    out_insert_chart = jqpc_get_html_chart_div(
@@ -142,12 +144,39 @@ def test_jqpc_get_html_chart_div_ok():
       margin_bottom_px=0,
       margin_right_px=0,
       margin_left_px=0,
-      indent=''
+      indent='',
+      class_str=''
    )
 
    eq_(
       out_insert_chart,
       '''<div id="1" style="width:300px; height:300px; margin-top:0px; margin-bottom:0px; margin-right:0px; margin-left:0px;"></div>''',
+      msg=None
+   )
+
+
+# noinspection PyPep8
+def test_jqpc_get_html_chart_div_ok2():
+   """ Tests: test_jqpc_get_html_chart_div_ok2
+   """
+   print('::: TEST: test_jqpc_get_html_chart_div_ok2()')
+
+   chart_id = 1
+   out_insert_chart = jqpc_get_html_chart_div(
+      chart_id,
+      width_px=300,
+      height_px=300,
+      margin_top_px=0,
+      margin_bottom_px=0,
+      margin_right_px=0,
+      margin_left_px=0,
+      indent='',
+      class_str='test-chart'
+   )
+
+   eq_(
+      out_insert_chart,
+      '''<div id="1" class="test-chart" style="width:300px; height:300px; margin-top:0px; margin-bottom:0px; margin-right:0px; margin-left:0px;"></div>''',
       msg=None
    )
 
@@ -384,7 +413,8 @@ if __name__ == '__main__':
    test_jqpc_get_html_js_css_resources__expect_failure1()
    test_jqpc_get_html_js_css_resources__expect_failure2()
 
-   test_jqpc_get_html_chart_div_ok()
+   test_jqpc_get_html_chart_div_ok1()
+   test_jqpc_get_html_chart_div_ok2()
 
    test_jqpc_get_html_jqplotchart_script_ok()
    test_jqpc_get_html_jqplotchart_script__expect_failure1()

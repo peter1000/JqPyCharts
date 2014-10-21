@@ -4,7 +4,7 @@ Release History
 
 .. _whats-new:
 
-Version 3.0.0     2014-10-21
+Version 4.0.0     2014-10-21
 ============================
 
 Features:
@@ -12,16 +12,20 @@ Features:
 
    .. note::
 
-      `JqPyCharts 3.0.0` is not backwards compatible (raise version to 3 to reflect that)
-      
+      `JqPyCharts 4.0.0` is not backwards compatible (raise version to 4 to reflect that)
+
       - renamed and added: function parameters
-      
-      
+
+
    - changed: :py:func:`JqPyCharts.main_code.jqpc_simple_bar_chart`
 
       - for horizontal bar chars: switched the order of bars which is now the same as the `chart_data_matrix`
 
    - added option to: specify relative path for sources tags
+
+   - added option to specify a html class for the chart for css styling
+
+      - :py:func:`JqPyCharts.main_code.jqpc_get_html_chart_div`
 
 
 Fixes/Other Changes:

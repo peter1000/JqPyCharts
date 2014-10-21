@@ -46,6 +46,7 @@ def test_jqpc_simple_bar_chart_ok1():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label='',
       chart_x_label_fontdict=None,
@@ -107,6 +108,7 @@ def test_jqpc_simple_bar_chart_ok2():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='whatever',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label='',
       chart_x_label_fontdict=None,
@@ -168,6 +170,7 @@ def test_jqpc_simple_bar_chart_ok3():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label='X Axe Label',
       chart_x_label_fontdict=None,
@@ -229,6 +232,7 @@ def test_jqpc_simple_bar_chart_ok4():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label={'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'},
       chart_x_label_fontdict=None,
@@ -290,6 +294,7 @@ def test_jqpc_simple_bar_chart_ok5():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label={'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'},
       chart_x_label_fontdict=None,
@@ -338,7 +343,7 @@ def test_jqpc_simple_bar_chart_ok5():
 
 
 def test_jqpc_simple_bar_chart_ok6():
-   """ Tests: test_jqpc_simple_bar_chart_ok6: 
+   """ Tests: test_jqpc_simple_bar_chart_ok6:
    """
    print('::: TEST: test_jqpc_simple_bar_chart_ok6()')
 
@@ -351,6 +356,7 @@ def test_jqpc_simple_bar_chart_ok6():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_abspath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label={'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'},
       chart_x_label_fontdict=None,
@@ -412,6 +418,7 @@ def test_jqpc_simple_bar_chart__expect_failure1():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id wrong can not have spaces',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label='',
       chart_x_label_fontdict=None,
@@ -459,6 +466,7 @@ def test_jqpc_simple_bar_chart__expect_failure1():
       shutil_rmtree(scripts_bar_chart_path)
 
 
+# noinspection PyUnusedLocal,PyUnusedLocal,PyUnusedLocal
 @nose_raises(Err)
 def test_jqpc_simple_bar_chart__not_absolute_source_path_expect_failure():
    """ Tests: test_jqpc_simple_bar_chart__not_absolute_source_path_expect_failure:
@@ -475,6 +483,7 @@ def test_jqpc_simple_bar_chart__not_absolute_source_path_expect_failure():
       absolute_source_dir_path=scripts_bar_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_bar_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_bar_chart',
       chart_x_label={'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'},
       chart_x_label_fontdict=None,
@@ -497,7 +506,6 @@ def test_jqpc_simple_bar_chart__not_absolute_source_path_expect_failure():
 
    if path_exists(scripts_bar_chart_path):
       shutil_rmtree(scripts_bar_chart_path)
-
 
 
 # CLEAN any left dirs

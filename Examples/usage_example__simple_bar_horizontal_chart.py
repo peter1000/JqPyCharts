@@ -46,6 +46,7 @@ def main():
       absolute_source_dir_path=path_abspath('scripts'),
       script_src_tag_dir_path='scripts',
       chart_id='id_1',
+      class_str='',
       chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
       chart_x_label='',
       chart_x_label_fontdict=None,

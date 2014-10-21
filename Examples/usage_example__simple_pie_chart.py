@@ -46,6 +46,7 @@ def main():
       absolute_source_dir_path=path_abspath('scripts'),
       script_src_tag_dir_path='scripts',
       chart_id='id_1',
+      class_str='',
       chart_title='JqPyCharts Simple Pie Chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),

@@ -46,6 +46,7 @@ def test_jqpc_simple_pie_chart_ok1():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),
@@ -103,6 +104,7 @@ def test_jqpc_simple_pie_chart_ok2():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='whatever',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', ''),
@@ -160,6 +162,7 @@ def test_jqpc_simple_pie_chart_ok3():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),
@@ -217,6 +220,7 @@ def test_jqpc_simple_pie_chart_ok4():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', ''),
@@ -274,6 +278,7 @@ def test_jqpc_simple_pie_chart_ok5():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_abspath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', ''),
@@ -331,6 +336,7 @@ def test_jqpc_simple_pie_chart__expect_failure1():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id wrong can not have spaces',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),
@@ -374,6 +380,7 @@ def test_jqpc_simple_pie_chart__expect_failure1():
       shutil_rmtree(scripts_pie_chart_path)
 
 
+# noinspection PyUnusedLocal,PyUnusedLocal,PyUnusedLocal
 @nose_raises(Err)
 def test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure():
    """ Tests: test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure
@@ -389,6 +396,7 @@ def test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure():
       absolute_source_dir_path=scripts_pie_chart_path,
       script_src_tag_dir_path=path_abspath(scripts_pie_chart_path),
       chart_id='example_id',
+      class_str='',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', ''),

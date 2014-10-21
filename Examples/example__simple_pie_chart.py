@@ -69,6 +69,7 @@ def main():
       absolute_source_dir_path=source_dir_path,
       script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_1',
+      class_str='',
       chart_title='JqPyCharts Simple Pie Chart: 3 (with defined legends)',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),
@@ -92,6 +93,7 @@ def main():
       absolute_source_dir_path=source_dir_path,
       script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_2',
+      class_str='',
       chart_title='JqPyCharts Simple Pie Chart: 2 (with no defined legends)',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', ''),
@@ -115,6 +117,7 @@ def main():
       absolute_source_dir_path=source_dir_path,
       script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_3',
+      class_str='',
       chart_title='JqPyCharts Simple Pie Chart: 3 (with None legends)',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', None),
@@ -138,6 +141,7 @@ def main():
       absolute_source_dir_path=source_dir_path,
       script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_4',
+      class_str='',
       chart_title='JqPyCharts Simple Pie Chart: 4 (no highlighter_prefix)',
       chart_data_matrix=[
          ('Fat', 200, '#EAA228', 'Fat: 200 g'),

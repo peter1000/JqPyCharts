@@ -132,6 +132,7 @@ Get the `Simple Bar Chart data` and write the html file
          absolute_source_dir_path=path_abspath('scripts'),
          script_src_tag_dir_path='scripts',
          chart_id='id_1',
+         class_str='',
          chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
          chart_x_label='',
          chart_x_label_fontdict=None,
@@ -177,6 +178,7 @@ This will look like:
          absolute_source_dir_path=path_abspath('scripts'),
          script_src_tag_dir_path='scripts',
          chart_id='id_1',
+         class_str='',
          chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
          chart_x_label='',
          chart_x_label_fontdict=None,
@@ -229,12 +231,10 @@ Functions
 from base64 import b85decode as base64_b85decode
 from os import makedirs as os_makedirs
 from os.path import (
-   abspath as path_abspath,
    isabs as path_isabs,
    isdir as path_isdir,
    isfile as path_isfile,
    join as path_join,
-   relpath as path_relpath,
 )
 
 from JqPyCharts.utils import Err
@@ -422,8 +422,6 @@ def jqpc_get_html_js_css_resources(list_of__resource_names, absolute_source_dir_
          '  absolute_source_dir_path: <{}>'.format(absolute_source_dir_path),
       ])
 
-      return ''
-
 
 # noinspection PyPep8
 def jqpc_get_html_chart_div(
@@ -434,7 +432,8 @@ def jqpc_get_html_chart_div(
       margin_bottom_px=0,
       margin_right_px=0,
       margin_left_px=0,
-      indent=''):
+      indent='',
+      class_str=''):
    """ Returns a html string with the html tag for the chart
 
    :param chart_id: (str) id of the chart this must match the one in the script
@@ -445,28 +444,42 @@ def jqpc_get_html_chart_div(
    :param margin_right_px: (int) Sets the right margin of an element pixels
    :param margin_left_px: (int) Sets the left margin of an element pixels
    :param indent: (str) empty string or spaces: moves the inserted text (line) to the left
+   :param class_str: (str) empty string or a string which is used as a html class for css styling
    :return: (str) html string
 
       .. code-block:: html
 
-         <div id="id_1" style="width:550px; height:300px; margin-top:20px; margin-bottom:0px; margin-right:20px; margin-left:0px;"></div>
+         <div id="id_1" class='my-pie-charts' style="width:550px; height:300px; margin-top:20px; margin-bottom:0px; margin-right:20px; margin-left:0px;"></div>
 
    """
-   return '{indent}<div id="{chart_id}" style="width:{width_px}px; height:{height_px}px; margin-top:{margin_top_px}px; margin-bottom:{margin_bottom_px}px; margin-right:{margin_right_p}px; margin-left:{margin_left_px}px;"></div>'.format(
-      indent=indent,
-      chart_id=chart_id,
-      width_px=width_px,
-      height_px=height_px,
-      margin_top_px=margin_top_px,
-      margin_bottom_px=margin_bottom_px,
-      margin_right_p=margin_right_px,
-      margin_left_px=margin_left_px
-   )
+   if class_str:
+      return '{indent}<div id="{chart_id}" class="{class_tag}" style="width:{width_px}px; height:{height_px}px; margin-top:{margin_top_px}px; margin-bottom:{margin_bottom_px}px; margin-right:{margin_right_p}px; margin-left:{margin_left_px}px;"></div>'.format(
+         indent=indent,
+         chart_id=chart_id,
+         width_px=width_px,
+         height_px=height_px,
+         margin_top_px=margin_top_px,
+         margin_bottom_px=margin_bottom_px,
+         margin_right_p=margin_right_px,
+         margin_left_px=margin_left_px,
+         class_tag=class_str
+      )
+   else:
+      return '{indent}<div id="{chart_id}" style="width:{width_px}px; height:{height_px}px; margin-top:{margin_top_px}px; margin-bottom:{margin_bottom_px}px; margin-right:{margin_right_p}px; margin-left:{margin_left_px}px;"></div>'.format(
+         indent=indent,
+         chart_id=chart_id,
+         width_px=width_px,
+         height_px=height_px,
+         margin_top_px=margin_top_px,
+         margin_bottom_px=margin_bottom_px,
+         margin_right_p=margin_right_px,
+         margin_left_px=margin_left_px,
+      )
 
 
 # noinspection PyListCreation
 def jqpc_get_html_jqplotchart_script(chart_id, extra_variables_lines_dict, jqplot_options_txt, enable_plugins=True,
-                                         base_indent=''):
+                                     base_indent=''):
    """ Returns a html string with the html tag for the chart
 
    :param chart_id: (str) id of the chart this must match the one in the script
@@ -531,6 +544,7 @@ def jqpc_simple_pie_chart(
       absolute_source_dir_path='',
       script_src_tag_dir_path='',
       chart_id='',
+      class_str='',
       chart_title='',
       chart_data_matrix=None,
       highlighter_prefix='',
@@ -551,6 +565,7 @@ def jqpc_simple_pie_chart(
       (if resource files exist it will skip writing them)
    :param script_src_tag_dir_path: (str) **absolute or relative** path to folder where all the resources are
    :param chart_id: (str) id of the chart this must match the one in the script: can not contain spaces
+   :param class_str: (str) empty string or a string which is used as a html class for css styling
    :param chart_title: (str) title
    :param chart_data_matrix: (list of tuples) FORMAT: (SeriesName, SeriesValue, SeriesColor, SeriesLegendText)
 
@@ -681,7 +696,8 @@ def jqpc_simple_pie_chart(
                   show: true,
                   tooltipLocation: 'sw',
                   useAxesFormatters: false,
-                  formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000"><strong>%s:</strong><br> {}: %s</div>'""".format(highlighter_prefix_txt))
+                  formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000"><strong>%s:</strong><br> {}: %s</div>'""".format(
+      highlighter_prefix_txt))
 
    jqplot_options_lines.append("""
                },
@@ -704,7 +720,7 @@ def jqpc_simple_pie_chart(
 
    html_chart_insert_tag = jqpc_get_html_chart_div(chart_id, width_px=width_px, height_px=height_px,
       margin_top_px=margin_top_px, margin_bottom_px=margin_bottom_px, margin_right_px=margin_right_px,
-      margin_left_px=margin_left_px, indent='      ')
+      margin_left_px=margin_left_px, indent='      ', class_str=class_str)
 
    return js_css_resources_header, jqplotchart_script, html_chart_insert_tag
 
@@ -714,6 +730,7 @@ def jqpc_simple_bar_chart(
       absolute_source_dir_path='',
       script_src_tag_dir_path='',
       chart_id='',
+      class_str='',
       chart_title='',
       chart_x_label='',
       chart_x_label_fontdict=None,
@@ -737,6 +754,7 @@ def jqpc_simple_bar_chart(
       (if resource files exist it will skip writing them)
    :param script_src_tag_dir_path: (str) **absolute or relative** path to folder where all the resources are
    :param chart_id: (str) id of the chart this must match the one in the script: can not contain spaces
+   :param class_str: (str) empty string or a string which is used as a html class for css styling
    :param chart_title: (str) title
    :param chart_x_label: (str) label
    :param chart_x_label_fontdict: (dict or None) KEYS:
@@ -794,9 +812,11 @@ def jqpc_simple_bar_chart(
       chart_ticks_fontdict = {'fontFamily': 'Courier New', 'fontSize': 12, 'textColor': '#000000'}
 
    if horizontal:
-      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)]
+      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in
+         reversed(chart_data_matrix)]
    else:
-      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in chart_data_matrix]
+      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in
+         chart_data_matrix]
 
    if None in chart_legends:
       raise Err('jqpc_simple_bar_chart', ['<SeriesLegendText> may not be <None>. We got: <{}>'.format(chart_legends)])
@@ -833,9 +853,12 @@ def jqpc_simple_bar_chart(
 
    if horizontal:
       extra_variables_lines_dict = {
-         'chart_data': [series_value for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
-         'chart_colors': [series_color for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
-         'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
+         'chart_data': [series_value for series_name, series_value, series_color, series_legend_text in
+            reversed(chart_data_matrix)],
+         'chart_colors': [series_color for series_name, series_value, series_color, series_legend_text in
+            reversed(chart_data_matrix)],
+         'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in
+            reversed(chart_data_matrix)],
          'chart_legends': chart_legends
       }
    else:
@@ -845,7 +868,6 @@ def jqpc_simple_bar_chart(
          'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
          'chart_legends': chart_legends
       }
-
 
    jqplot_options_lines = []
    jqplot_options_lines.append("""
@@ -920,7 +942,8 @@ def jqpc_simple_bar_chart(
                tooltipAxes: 'x',
                yvalues: 1,
                tooltipOffset: 5,
-               formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000">{}: %s</div>'""".format(highlighter_prefix_txt))
+               formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000">{}: %s</div>'""".format(
+         highlighter_prefix_txt))
       jqplot_options_lines.append("""
             },
             }""")
@@ -972,7 +995,8 @@ def jqpc_simple_bar_chart(
                tooltipAxes: 'y',
                yvalues: 1,
                tooltipOffset: 5,
-               formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000">{}: %s</div>'""".format(highlighter_prefix_txt))
+               formatString: '<div style="background-color: #ffffff; border:1px #000000 solid; padding: 0.5em 0.5em 0.5em 0.5em; color: #000000">{}: %s</div>'""".format(
+         highlighter_prefix_txt))
       jqplot_options_lines.append("""
             },
             }""")
@@ -983,6 +1007,6 @@ def jqpc_simple_bar_chart(
 
    html_chart_insert_tag = jqpc_get_html_chart_div(chart_id, width_px=width_px, height_px=height_px,
       margin_top_px=margin_top_px, margin_bottom_px=margin_bottom_px, margin_right_px=margin_right_px,
-      margin_left_px=margin_left_px, indent='      ')
+      margin_left_px=margin_left_px, indent='      ', class_str=class_str)
 
    return js_css_resources_header, jqplotchart_script, html_chart_insert_tag
