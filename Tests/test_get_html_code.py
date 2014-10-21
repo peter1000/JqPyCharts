@@ -8,6 +8,7 @@ from os.path import (
    abspath as path_abspath,
    dirname as path_dirname,
    join as path_join,
+   relpath as path_relpath,
 )
 from sys import path as sys_path
 
@@ -35,10 +36,10 @@ from JqPyCharts.utils import Err
 
 
 # noinspection PyUnusedLocal
-def test_jqpc_get_html_js_css_resources_ok():
-   """ Tests: test_jqpc_get_html_js_css_resources_ok
+def test_jqpc_get_html_js_css_resources_ok1():
+   """ Tests: test_jqpc_get_html_js_css_resources_ok1
    """
-   print('::: TEST: test_jqpc_get_html_js_css_resources_ok()')
+   print('::: TEST: test_jqpc_get_html_js_css_resources_ok1()')
 
    source_scripts_path = path_join(SCRIPT_PATH, 'source_scripts')
    # make sure we have the needed resources
@@ -49,8 +50,34 @@ def test_jqpc_get_html_js_css_resources_ok():
       'jquery.jqplot.min.css',
       'jqplot.highlighter.min.js',
    ]
-   out_js_css_resources = jqpc_get_html_js_css_resources(needed_resources, source_scripts_path, indent='      ')
+   out_js_css_resources = jqpc_get_html_js_css_resources(
+      needed_resources, 
+      source_scripts_path, 
+      path_relpath(source_scripts_path),
+      indent='      '
+   )
 
+# noinspection PyUnusedLocal
+def test_jqpc_get_html_js_css_resources_ok2():
+   """ Tests: test_jqpc_get_html_js_css_resources_ok2
+   """
+   print('::: TEST: test_jqpc_get_html_js_css_resources_ok2()')
+
+   source_scripts_path = path_join(SCRIPT_PATH, 'source_scripts')
+   # make sure we have the needed resources
+   jqpc_write__resource_dict('jqplot_scripts', source_scripts_path, force=False)
+
+   needed_resources = [
+      'jquery.min.js',
+      'jquery.jqplot.min.css',
+      'jqplot.highlighter.min.js',
+   ]
+   out_js_css_resources = jqpc_get_html_js_css_resources(
+      needed_resources, 
+      source_scripts_path, 
+      path_abspath(source_scripts_path),
+      indent='      '
+   )
 
 # noinspection PyUnusedLocal
 @nose_raises(Err)
@@ -68,7 +95,12 @@ def test_jqpc_get_html_js_css_resources__expect_failure1():
       'jquery.jqplot.min.css',
       'wrong_resource_name',
    ]
-   out_js_css_resources = jqpc_get_html_js_css_resources(needed_resources, source_scripts_path, indent='      ')
+   out_js_css_resources = jqpc_get_html_js_css_resources(
+      needed_resources, 
+      source_scripts_path, 
+      path_relpath(source_scripts_path),
+      indent='      '
+   )
 
 
 # noinspection PyUnusedLocal
@@ -87,7 +119,12 @@ def test_jqpc_get_html_js_css_resources__expect_failure2():
       'jquery.jqplot.min.css',
       'wrong_ending.wrong',
    ]
-   out_js_css_resources = jqpc_get_html_js_css_resources(needed_resources, source_scripts_path, indent='      ')
+   out_js_css_resources = jqpc_get_html_js_css_resources(
+      needed_resources, 
+      source_scripts_path, 
+      path_relpath(source_scripts_path),
+      indent='      '
+   )
 
 
 # noinspection PyPep8
@@ -342,7 +379,8 @@ def test_jqpc_get_html_jqplotchart_script__expect_failure2():
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 if __name__ == '__main__':
    pass
-   test_jqpc_get_html_js_css_resources_ok()
+   test_jqpc_get_html_js_css_resources_ok1()
+   test_jqpc_get_html_js_css_resources_ok2()
    test_jqpc_get_html_js_css_resources__expect_failure1()
    test_jqpc_get_html_js_css_resources__expect_failure2()
 

@@ -53,7 +53,8 @@ html_template = '''
 def main():
 
    # common var
-   source_dir_path = 'scripts'
+   source_dir_path = path_abspath('scripts')
+   script_src_tag_dir_path = 'scripts'
    background = '#fffdf6'
    legend_font_px = 15
    data_label_threshold = 9.0
@@ -63,9 +64,10 @@ def main():
    margin_bottom_px = 0
    margin_right_px = 0
    margin_left_px = 0
-         
+
    js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_pie_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_1',
       chart_title='JqPyCharts Simple Pie Chart: 3 (with defined legends)',
       chart_data_matrix=[
@@ -87,12 +89,13 @@ def main():
    )
 
    js_css_resources_header2, jqplotchart_script2, html_chart_insert_tag2 = jqpc_simple_pie_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_2',
       chart_title='JqPyCharts Simple Pie Chart: 2 (with no defined legends)',
       chart_data_matrix=[
-         ('Fat', 200, '#EAA228', ''), 
-         ('Protein', 21, '#4bb2c5', ''), 
+         ('Fat', 200, '#EAA228', ''),
+         ('Protein', 21, '#4bb2c5', ''),
          ('Carbohydrate', 10, '#c5b47f', '')
       ],
 
@@ -107,15 +110,15 @@ def main():
       margin_right_px=margin_right_px,
       margin_left_px=margin_left_px
    )
-   
-   
+
    js_css_resources_header3, jqplotchart_script3, html_chart_insert_tag3 = jqpc_simple_pie_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_3',
       chart_title='JqPyCharts Simple Pie Chart: 3 (with None legends)',
       chart_data_matrix=[
-         ('Fat', 200, '#EAA228', None), 
-         ('Protein', 21, '#4bb2c5', None), 
+         ('Fat', 200, '#EAA228', None),
+         ('Protein', 21, '#4bb2c5', None),
          ('Carbohydrate', 10, '#c5b47f', None)
       ],
 
@@ -130,9 +133,10 @@ def main():
       margin_right_px=margin_right_px,
       margin_left_px=margin_left_px
    )
-   
+
    js_css_resources_header4, jqplotchart_script4, html_chart_insert_tag4 = jqpc_simple_pie_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_4',
       chart_title='JqPyCharts Simple Pie Chart: 4 (no highlighter_prefix)',
       chart_data_matrix=[
@@ -152,7 +156,7 @@ def main():
       margin_right_px=margin_right_px,
       margin_left_px=margin_left_px
    )
-   
+
    example_final_html_code = html_template.format(
       js_css_resources_header=js_css_resources_header1,
       jqplotchart_script1=jqplotchart_script1,
@@ -164,7 +168,7 @@ def main():
       html_chart_insert_tag3=html_chart_insert_tag3,
       html_chart_insert_tag4=html_chart_insert_tag4,
    )
-   
+
    with open('example__simple_pie_chart.html', 'w') as file_:
       file_.write(example_final_html_code)
 

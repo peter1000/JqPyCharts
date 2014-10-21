@@ -54,7 +54,8 @@ Get the `Simple Pie Chart data` and write the html file
    .. code-block:: python3
 
       js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_pie_chart(
-         source_dir_path='scripts',
+         absolute_source_dir_path=path_abspath('scripts'),
+         script_src_tag_dir_path='scripts',
          chart_id='id_1',
          chart_title='JqPyCharts Simple Pie Chart',
          chart_data_matrix=[
@@ -83,6 +84,7 @@ Get the `Simple Pie Chart data` and write the html file
 
       with open('usage_example__simple_pie_chart.html', 'w') as file_:
          file_.write(example_final_html_code)
+
 
 This will look like:
 
@@ -127,7 +129,8 @@ Get the `Simple Bar Chart data` and write the html file
    .. code-block:: python3
 
       js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_bar_chart(
-         source_dir_path='scripts',
+         absolute_source_dir_path=path_abspath('scripts'),
+         script_src_tag_dir_path='scripts',
          chart_id='id_1',
          chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
          chart_x_label='',
@@ -156,8 +159,9 @@ Get the `Simple Bar Chart data` and write the html file
          html_chart_insert_tag1=html_chart_insert_tag1,
       )
 
-      with open('usage_example__simple_bar_chart.html', 'w') as file_:
+      with open('example__simple_bar_chart.html', 'w') as file_:
          file_.write(example_final_html_code)
+
 
 This will look like:
 
@@ -170,7 +174,8 @@ This will look like:
    .. code-block:: python3
 
       js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_bar_chart(
-         source_dir_path='scripts',
+         absolute_source_dir_path=path_abspath('scripts'),
+         script_src_tag_dir_path='scripts',
          chart_id='id_1',
          chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
          chart_x_label='',
@@ -203,7 +208,6 @@ This will look like:
          file_.write(example_final_html_code)
 
 
-
 This will look like:
 
 .. image:: img/usage_example__simple_bar_horizontal_chart.png
@@ -226,6 +230,7 @@ from base64 import b85decode as base64_b85decode
 from os import makedirs as os_makedirs
 from os.path import (
    abspath as path_abspath,
+   isabs as path_isabs,
    isdir as path_isdir,
    isfile as path_isfile,
    join as path_join,
@@ -275,32 +280,38 @@ def jqpc_get_resources_dict(resource_dict_name):
    return resource_dicts_index[resource_dict_name]
 
 
-def jqpc_write__resource_dict(dict_name, out_dir_path, force=False):
-   """ Helper: writes a complete `resource dict` to path out_dir_path: decodes it to separate files
-   If 'out_dir_path does not exist it will be created (inclusive intermediate folders)
+def jqpc_write__resource_dict(dict_name, absolute_source_dir_path, force=False):
+   """ Helper: writes a complete `resource dict` to path absolute_source_dir_path: decodes it to separate files
+   If 'absolute_source_dir_path does not exist it will be created (inclusive intermediate folders)
 
    :param dict_name: (str) name of `resource dict`
-   :param out_dir_path: (str) path to folder
+   :param absolute_source_dir_path: (str) absolute path to folder
    :param force: (bool) if True overwrites any existing files
+   :raise Err:
    """
-   output_dir_abspath = path_abspath(out_dir_path)
-   if not path_isdir(output_dir_abspath):
-      os_makedirs(out_dir_path, mode=0o777, exist_ok=True)
+   if path_isabs(absolute_source_dir_path):
+      if not path_isdir(absolute_source_dir_path):
+         os_makedirs(absolute_source_dir_path, mode=0o777, exist_ok=True)
 
-   resource_dict = jqpc_get_resources_dict(dict_name)
-   for file__name, file_data in resource_dict.items():
-      file_path = path_join(output_dir_abspath, file__name)
-      if path_isfile(file_path):
-         if not force:
-            continue
+      resource_dict = jqpc_get_resources_dict(dict_name)
+      for file__name, file_data in resource_dict.items():
+         file_path = path_join(absolute_source_dir_path, file__name)
+         if path_isfile(file_path):
+            if not force:
+               continue
 
-      with open(file_path, 'wb') as file_:
-         file_.write(base64_b85decode(file_data))
+         with open(file_path, 'wb') as file_:
+            file_.write(base64_b85decode(file_data))
+   else:
+      raise Err('jqpc_write__resource_dict', [
+         '<absolute_source_dir_path> seems not yo be an <absolute path>',
+         '  absolute_source_dir_path: <{}>'.format(absolute_source_dir_path),
+      ])
 
 
-def jqpc_write__selected_resources(dict_name, list_of_resource_names, out_dir_path, force=False):
-   """ Helper: writes selected `resources` to path out_dir_path: decodes it to separate files
-   If 'out_dir_path does not exist it will be created (inclusive intermediate folders)
+def jqpc_write__selected_resources(dict_name, list_of_resource_names, absolute_source_dir_path, force=False):
+   """ Helper: writes selected `resources` to path absolute_source_dir_path: decodes it to separate files
+   If 'absolute_source_dir_path does not exist it will be created (inclusive intermediate folders)
 
    :param dict_name: (str) name of `resource dict`
    :param list_of_resource_names: (list) list of resources
@@ -314,42 +325,48 @@ def jqpc_write__selected_resources(dict_name, list_of_resource_names, out_dir_pa
             '/out_dir_resource'
          )
 
-   :param out_dir_path: (str) path to folder if it does not exist it will be created
+   :param absolute_source_dir_path: (str) absolute path to folder if it does not exist it will be created
    :param force: (bool) if True overwrites any existing files
    :raise Err:
    """
-   output_dir_abspath = path_abspath(out_dir_path)
-   if not path_isdir(output_dir_abspath):
-      os_makedirs(output_dir_abspath, mode=0o777, exist_ok=True)
+   if path_isabs(absolute_source_dir_path):
+      if not path_isdir(absolute_source_dir_path):
+         os_makedirs(absolute_source_dir_path, mode=0o777, exist_ok=True)
 
-   resource_dict = jqpc_get_resources_dict(dict_name)
-   for resource_name in list_of_resource_names:
-      if resource_name not in resource_dict:
-         raise Err('jqpc_write__selected_resources', [
-            'It seems that the specified `resource_name`: <{}>'.format(resource_name),
-            '  is not a valid key of `dict_name`: <{}>'.format(dict_name),
-            '    <{}>'.format(resource_dict.keys())
-         ])
+      resource_dict = jqpc_get_resources_dict(dict_name)
+      for resource_name in list_of_resource_names:
+         if resource_name not in resource_dict:
+            raise Err('jqpc_write__selected_resources', [
+               'It seems that the specified `resource_name`: <{}>'.format(resource_name),
+               '  is not a valid key of `dict_name`: <{}>'.format(dict_name),
+               '    <{}>'.format(resource_dict.keys())
+            ])
 
-      file_data = resource_dict[resource_name]
-      file_path = path_join(output_dir_abspath, resource_name)
-      if path_isfile(file_path):
-         if not force:
-            continue
+         file_data = resource_dict[resource_name]
+         file_path = path_join(absolute_source_dir_path, resource_name)
+         if path_isfile(file_path):
+            if not force:
+               continue
 
-      with open(file_path, 'wb') as file_:
-         file_.write(base64_b85decode(file_data))
+         with open(file_path, 'wb') as file_:
+            file_.write(base64_b85decode(file_data))
+   else:
+      raise Err('jqpc_write__selected_resources', [
+         '<absolute_source_dir_path> seems not yo be an <absolute path>',
+         '  absolute_source_dir_path: <{}>'.format(absolute_source_dir_path),
+      ])
 
 
-def jqpc_get_html_js_css_resources(list_of__resource_names, source_dir_path, indent=''):
+def jqpc_get_html_js_css_resources(list_of__resource_names, absolute_source_dir_path, script_src_tag_dir_path, indent=''):
    """ Returns a html string with the javascript / css resources
 
    :param list_of__resource_names: (list) list of resources
-   :param source_dir_path: (str) **relative** path to folder where all the resources are
+   :param absolute_source_dir_path: (str) absolute path to folder where all the resources are
+   :param script_src_tag_dir_path: (str) **absolute or relative** path to folder where all the resources are
 
       .. warning:: all resources defined in `list_of_resource_names`: must be in the folder
 
-      The `script src tag` will use an relative path
+      The `script src tag` will use the given `script_src_tag_dir_path` string
 
    :param indent: (str) empty string or spaces: moves the inserted text (lines) to the left
    :return: (str) html string
@@ -358,44 +375,54 @@ def jqpc_get_html_js_css_resources(list_of__resource_names, source_dir_path, ind
 
       .. code-block:: html
 
-         <script type="text/javascript" src="source_dir_path/jquery.min.js"></script>
+         <script type="text/javascript" src="script_src_tag_dir_path/jquery.min.js"></script>
 
       css:
 
       .. code-block:: css
 
-         <link rel="stylesheet" type="text/css" href="source_dir_path/jquery.jqplot.min.css">
+         <link rel="stylesheet" type="text/css" href="script_src_tag_dir_path/jquery.jqplot.min.css">
 
    :raise Err:
    """
-   source_dir_path__abspath = path_abspath(source_dir_path)
+   if path_isabs(absolute_source_dir_path):
 
-   output_lines_js = ['']
-   output_lines_css = ['']
+      output_lines_js = ['']
+      output_lines_css = ['']
 
-   for resource_name in list_of__resource_names:
-      file_path = path_join(source_dir_path__abspath, resource_name)
-      if not path_isfile(file_path):
-         raise Err('jqpc_get_html_js_css_resources', [
-            '`resource_name`: <{}> !! File seems not to exist.'.format(resource_name),
-            '  Path: <{}>'.format(file_path)
-         ])
-      if resource_name.endswith('.js'):
-         output_lines_js.append('{}<script type="text/javascript" src="{}"></script>'.format(
-            indent,
-            path_relpath(file_path)
-         ))
-      elif resource_name.endswith('.css'):
-         output_lines_css.append('{}<link rel="stylesheet" type="text/css" href="{}">'.format(
-            indent,
-            path_relpath(file_path)
-         ))
-      else:
-         raise Err('jqpc_get_html_js_css_resources', [
-            '`resource_name`: <{}> must end with <.js> or <.css>'.format(resource_name)
-         ])
+      for resource_name in list_of__resource_names:
+         absolute_file_path = path_join(absolute_source_dir_path, resource_name)
+         relative_file_path = path_join(script_src_tag_dir_path, resource_name)
+         if not path_isfile(absolute_file_path):
+            raise Err('jqpc_get_html_js_css_resources', [
+               '`resource_name`: <{}> !! File seems not to exist.'.format(resource_name),
+               '  Path: <{}>'.format(absolute_file_path)
+            ])
 
-   return '\n'.join(output_lines_js + output_lines_css + [''])
+         if resource_name.endswith('.js'):
+            output_lines_js.append('{}<script type="text/javascript" src="{}"></script>'.format(
+               indent,
+               relative_file_path
+            ))
+         elif resource_name.endswith('.css'):
+            output_lines_css.append('{}<link rel="stylesheet" type="text/css" href="{}">'.format(
+               indent,
+               relative_file_path
+            ))
+         else:
+            raise Err('jqpc_get_html_js_css_resources', [
+               '`resource_name`: <{}> must end with <.js> or <.css>'.format(resource_name)
+            ])
+
+      return '\n'.join(output_lines_js + output_lines_css + [''])
+
+   else:
+      raise Err('jqpc_get_html_js_css_resources', [
+         '<absolute_source_dir_path> seems not yo be an <absolute path>',
+         '  absolute_source_dir_path: <{}>'.format(absolute_source_dir_path),
+      ])
+
+      return ''
 
 
 # noinspection PyPep8
@@ -501,7 +528,8 @@ def jqpc_get_html_jqplotchart_script(chart_id, extra_variables_lines_dict, jqplo
 
 # noinspection PyListCreation,PyPep8
 def jqpc_simple_pie_chart(
-      source_dir_path='',
+      absolute_source_dir_path='',
+      script_src_tag_dir_path='',
       chart_id='',
       chart_title='',
       chart_data_matrix=None,
@@ -519,8 +547,9 @@ def jqpc_simple_pie_chart(
 
    uses default indent
 
-   :param source_dir_path: (str) path to folder where all the resources will be stored.
+   :param absolute_source_dir_path: (str) absolute path to folder where all the resources will be stored.
       (if resource files exist it will skip writing them)
+   :param script_src_tag_dir_path: (str) **absolute or relative** path to folder where all the resources are
    :param chart_id: (str) id of the chart this must match the one in the script: can not contain spaces
    :param chart_title: (str) title
    :param chart_data_matrix: (list of tuples) FORMAT: (SeriesName, SeriesValue, SeriesColor, SeriesLegendText)
@@ -588,9 +617,14 @@ def jqpc_simple_pie_chart(
       'jquery.jqplot.min.css'
    ]
 
-   jqpc_write__selected_resources('jqplot_scripts', needed_resources, source_dir_path, force=False)
+   jqpc_write__selected_resources('jqplot_scripts', needed_resources, absolute_source_dir_path, force=False)
 
-   js_css_resources_header = (jqpc_get_html_js_css_resources(needed_resources, source_dir_path, indent='      '))
+   js_css_resources_header = jqpc_get_html_js_css_resources(
+      needed_resources,
+      absolute_source_dir_path,
+      script_src_tag_dir_path,
+      indent='      '
+   )
 
    extra_variables_lines_dict = {
       'chart_data': [[series_name, series_value] for series_name, series_value, series_color, series_legend_text in
@@ -677,7 +711,8 @@ def jqpc_simple_pie_chart(
 
 # noinspection PyPep8,PyListCreation
 def jqpc_simple_bar_chart(
-      source_dir_path='',
+      absolute_source_dir_path='',
+      script_src_tag_dir_path='',
       chart_id='',
       chart_title='',
       chart_x_label='',
@@ -698,8 +733,9 @@ def jqpc_simple_bar_chart(
 
    uses default indent
 
-   :param source_dir_path: (str) path to folder where all the resources will be stored.
+   :param absolute_source_dir_path: (str) absolute path to folder where all the resources will be stored.
       (if resource files exist it will skip writing them)
+   :param script_src_tag_dir_path: (str) **absolute or relative** path to folder where all the resources are
    :param chart_id: (str) id of the chart this must match the one in the script: can not contain spaces
    :param chart_title: (str) title
    :param chart_x_label: (str) label
@@ -786,9 +822,14 @@ def jqpc_simple_bar_chart(
       'jquery.jqplot.min.css'
    ]
 
-   jqpc_write__selected_resources('jqplot_scripts', needed_resources, source_dir_path, force=False)
+   jqpc_write__selected_resources('jqplot_scripts', needed_resources, absolute_source_dir_path, force=False)
 
-   js_css_resources_header = (jqpc_get_html_js_css_resources(needed_resources, source_dir_path, indent='      '))
+   js_css_resources_header = jqpc_get_html_js_css_resources(
+      needed_resources,
+      absolute_source_dir_path,
+      script_src_tag_dir_path,
+      indent='      '
+   )
 
    if horizontal:
       extra_variables_lines_dict = {

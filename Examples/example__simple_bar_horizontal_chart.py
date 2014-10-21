@@ -59,7 +59,8 @@ html_template = '''
 def main():
 
    # common var
-   source_dir_path = 'scripts'
+   source_dir_path = path_abspath('scripts')
+   script_src_tag_dir_path = 'scripts'
    background = '#fffdf6'
    horizontal = True
    width_px = 700
@@ -70,7 +71,8 @@ def main():
    margin_left_px = 0
 
    js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_1',
       chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
       chart_x_label='',
@@ -93,7 +95,8 @@ def main():
       margin_left_px=margin_left_px)
 
    js_css_resources_header2, jqplotchart_script2, html_chart_insert_tag2 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_2',
       chart_title='JqPyCharts Simple Bar Chart: 2 (with no defined legends)',
       chart_x_label='',
@@ -116,7 +119,8 @@ def main():
       margin_left_px=margin_left_px)
 
    js_css_resources_header3, jqplotchart_script3, html_chart_insert_tag3 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_3',
       chart_title='JqPyCharts Simple Bar Chart: 3 (with grid_lines)',
       chart_x_label='',
@@ -139,7 +143,8 @@ def main():
       margin_left_px=margin_left_px)
 
    js_css_resources_header4, jqplotchart_script4, html_chart_insert_tag4 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_4',
       chart_title='JqPyCharts Simple Bar Chart: 4 (with x_label)',
       chart_x_label='Grams',
@@ -162,7 +167,8 @@ def main():
       margin_left_px=margin_left_px)
 
    js_css_resources_header5, jqplotchart_script5, html_chart_insert_tag5 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_5',
       chart_title='JqPyCharts Simple Bar Chart: 5 (with x_label_fontdict)',
       chart_x_label='Grams',
@@ -185,7 +191,8 @@ def main():
       margin_left_px=margin_left_px)
 
    js_css_resources_header6, jqplotchart_script6, html_chart_insert_tag6 = jqpc_simple_bar_chart(
-      source_dir_path=source_dir_path,
+      absolute_source_dir_path=source_dir_path,
+      script_src_tag_dir_path=script_src_tag_dir_path,
       chart_id='id_6',
       chart_title='JqPyCharts Simple Bar Chart: 6 (with ticks_fontdict)',
       chart_x_label='Grams',

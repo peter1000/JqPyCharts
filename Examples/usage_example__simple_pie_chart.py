@@ -43,7 +43,8 @@ def main():
 '''
 
    js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_pie_chart(
-      source_dir_path='scripts',
+      absolute_source_dir_path=path_abspath('scripts'),
+      script_src_tag_dir_path='scripts',
       chart_id='id_1',
       chart_title='JqPyCharts Simple Pie Chart',
       chart_data_matrix=[
@@ -63,16 +64,16 @@ def main():
       margin_right_px=0,
       margin_left_px=0
    )
-   
+
    example_final_html_code = html_template.format(
       js_css_resources_header=js_css_resources_header1,
       jqplotchart_script1=jqplotchart_script1,
       html_chart_insert_tag1=html_chart_insert_tag1,
    )
-   
+
    with open('usage_example__simple_pie_chart.html', 'w') as file_:
       file_.write(example_final_html_code)
-   
+
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
 if __name__ == '__main__':

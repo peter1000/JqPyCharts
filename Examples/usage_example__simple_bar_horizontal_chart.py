@@ -43,7 +43,8 @@ def main():
 '''
 
    js_css_resources_header1, jqplotchart_script1, html_chart_insert_tag1 = jqpc_simple_bar_chart(
-      source_dir_path='scripts',
+      absolute_source_dir_path=path_abspath('scripts'),
+      script_src_tag_dir_path='scripts',
       chart_id='id_1',
       chart_title='JqPyCharts Simple Bar Chart: 1 (with defined legends)',
       chart_x_label='',

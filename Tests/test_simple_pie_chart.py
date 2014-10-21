@@ -43,7 +43,8 @@ def test_jqpc_simple_pie_chart_ok1():
       shutil_rmtree(scripts_pie_chart_path)
 
    js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
-      source_dir_path=scripts_pie_chart_path,
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
@@ -99,7 +100,8 @@ def test_jqpc_simple_pie_chart_ok2():
       shutil_rmtree(scripts_pie_chart_path)
 
    js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
-      source_dir_path=scripts_pie_chart_path,
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
@@ -155,7 +157,8 @@ def test_jqpc_simple_pie_chart_ok3():
       shutil_rmtree(scripts_pie_chart_path)
 
    js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
-      source_dir_path=scripts_pie_chart_path,
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
@@ -211,7 +214,8 @@ def test_jqpc_simple_pie_chart_ok4():
       shutil_rmtree(scripts_pie_chart_path)
 
    js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
-      source_dir_path=scripts_pie_chart_path,
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
@@ -256,6 +260,62 @@ def test_jqpc_simple_pie_chart_ok4():
       shutil_rmtree(scripts_pie_chart_path)
 
 
+def test_jqpc_simple_pie_chart_ok5():
+   """ Tests: test_jqpc_simple_pie_chart_ok5: empty highlighter_prefix
+   """
+   print('::: TEST: test_jqpc_simple_pie_chart_ok5()')
+
+   scripts_pie_chart_path = path_join(SCRIPT_PATH, 'scripts_pie_chart_test_jqpc_simple_pie_chart_ok5')
+
+   if path_exists(scripts_pie_chart_path):
+      shutil_rmtree(scripts_pie_chart_path)
+
+   js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_abspath(scripts_pie_chart_path),
+      chart_id='example_id',
+      chart_title='JqPyCharts simple_pie_chart',
+      chart_data_matrix=[
+         ('Fat', 200, '#EAA228', ''),
+         ('Protein', 21, '#4bb2c5', ''),
+         ('Carbohydrate', 10, '#c5b47f', '')
+      ],
+      highlighter_prefix='',
+      background='#fffdf6',
+      legend_font_px=15,
+      data_label_threshold=9.0,
+      width_px=480,
+      height_px=300,
+      margin_top_px=0,
+      margin_bottom_px=0,
+      margin_right_px=0,
+      margin_left_px=0
+   )
+
+   for resource_name in [
+      'jquery.min.js',
+      'jquery.jqplot.min.js',
+      'jqplot.highlighter.min.js',
+      'jqplot.canvasTextRenderer.min.js',
+      'jqplot.pieRenderer.min.js',
+      'jquery.jqplot.min.css']:
+
+      resource_dir_path__abspath = path_join(scripts_pie_chart_path, resource_name)
+      if resource_dir_path__abspath[-2:] == 'js':
+         check_line = '<script type="text/javascript" src="{}"></script>'.format(resource_dir_path__abspath)
+         ok_(check_line in js_css_resources_header, msg=None)
+      elif resource_dir_path__abspath[-3:] == 'css':
+         check_line = '<link rel="stylesheet" type="text/css" href="{}">'.format(resource_dir_path__abspath)
+         ok_(check_line in js_css_resources_header, msg=None)
+      else:
+         raise Err('test_jqpc_simple_pie_chart_ok5', [
+            '`resource_name`: <{}> must end with <.js> or <.css>'.format(resource_name)
+         ])
+
+   if path_exists(scripts_pie_chart_path):
+      shutil_rmtree(scripts_pie_chart_path)
+
+
 @nose_raises(Err)
 def test_jqpc_simple_pie_chart__expect_failure1():
    """ Tests: test_jqpc_simple_pie_chart__expect_failure1: chart_id with spaces
@@ -268,7 +328,8 @@ def test_jqpc_simple_pie_chart__expect_failure1():
       shutil_rmtree(scripts_pie_chart_path)
 
    js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
-      source_dir_path=scripts_pie_chart_path,
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_relpath(scripts_pie_chart_path),
       chart_id='example_id wrong can not have spaces',
       chart_title='JqPyCharts simple_pie_chart',
       chart_data_matrix=[
@@ -313,6 +374,43 @@ def test_jqpc_simple_pie_chart__expect_failure1():
       shutil_rmtree(scripts_pie_chart_path)
 
 
+@nose_raises(Err)
+def test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure():
+   """ Tests: test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure
+   """
+   print('::: TEST: test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure()')
+
+   scripts_pie_chart_path = 'scripts_pie_chart_test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure'
+
+   if path_exists(scripts_pie_chart_path):
+      shutil_rmtree(scripts_pie_chart_path)
+
+   js_css_resources_header, jqplotchart_script, html_chart_insert_tag = jqpc_simple_pie_chart(
+      absolute_source_dir_path=scripts_pie_chart_path,
+      script_src_tag_dir_path=path_abspath(scripts_pie_chart_path),
+      chart_id='example_id',
+      chart_title='JqPyCharts simple_pie_chart',
+      chart_data_matrix=[
+         ('Fat', 200, '#EAA228', ''),
+         ('Protein', 21, '#4bb2c5', ''),
+         ('Carbohydrate', 10, '#c5b47f', '')
+      ],
+      highlighter_prefix='',
+      background='#fffdf6',
+      legend_font_px=15,
+      data_label_threshold=9.0,
+      width_px=480,
+      height_px=300,
+      margin_top_px=0,
+      margin_bottom_px=0,
+      margin_right_px=0,
+      margin_left_px=0
+   )
+
+   if path_exists(scripts_pie_chart_path):
+      shutil_rmtree(scripts_pie_chart_path)
+
+
 # CLEAN any left dirs
 def test_clean_created_dirs():
    """ Tests: test_clean_created_dirs: this is just a helper to clean the dirs created in the tests
@@ -324,7 +422,9 @@ def test_clean_created_dirs():
       'scripts_pie_chart_test_jqpc_simple_pie_chart_ok2',
       'scripts_pie_chart_test_jqpc_simple_pie_chart_ok3',
       'scripts_pie_chart_test_jqpc_simple_pie_chart_ok4',
+      'scripts_pie_chart_test_jqpc_simple_pie_chart_ok5',
       'scripts_pie_chart_test_jqpc_simple_pie_chart__expect_failure1',
+      'scripts_pie_chart_test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure',
    ]:
       clean_path = path_join(SCRIPT_PATH, dir_name)
       if path_exists(clean_path):
@@ -338,6 +438,8 @@ if __name__ == '__main__':
    test_jqpc_simple_pie_chart_ok2()
    test_jqpc_simple_pie_chart_ok3()
    test_jqpc_simple_pie_chart_ok4()
+   test_jqpc_simple_pie_chart_ok5()
    test_jqpc_simple_pie_chart__expect_failure1()
+   test_jqpc_simple_pie_chart__not_absolute_source_path_expect_failure()
 
    test_clean_created_dirs()

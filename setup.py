@@ -242,7 +242,7 @@ setuptools_setup(
    description="Selection of: Javascripts / Css for simple charts in python projects.",
    long_description=open('README.rst', 'r').read(),
    classifiers=[
-      'Development Status :: 3 - Alpha',
+      'Development Status :: 4 - Beta',
       'Operating System :: POSIX :: Linux',
       'Programming Language :: Python :: 3',
       'Topic :: Documentation',
