@@ -12,11 +12,11 @@ Required Software
 
 .. note:: other versions might also work but this are the once used for development
 
-- Python >= 3.4.2rc1+ (3.4.2rc1+  compiled 20141004)
+- Python >= 3.4.2+ (3.4.2+  compiled 20141011)
 
    - `<http://www.python.org/>`_
 
-- setuptools >= 6.0.2
+- setuptools >= 7.0
 
    - `<http://pythonhosted.org/setuptools/>`_
 
@@ -30,7 +30,7 @@ Required Software
 
    - `<http://nedbatchelder.com/code/coverage>`_
 
-- PSphinxTheme >=2.0.1  (for documentation generation)
+- PSphinxTheme >= 2.0.3  (for documentation generation)
 
    - `<https://github.com/peter1000/PSphinxTheme>`_
 
@@ -38,15 +38,19 @@ Required Software
 Additional Recommended Software Python
 ======================================
 
-- Cython >= 0.21
+- Cython >= 0.21.1
 
    - `<http://cython.org/>`_
 
-- PySpeedIT >=1.0.8  (A collection of: Benchmark-IT, Profile-IT, Line-Memory-Profile-IT, Disassemble-IT.)
+- LCONF >= 7.0.0  (L(ight) CONF(iguration): A simple human-readable data serialization format for dynamic configuration.)
+
+   - `<https://github.com/peter1000/LCONF>`_
+
+- PySpeedIT >= 1.0.8  (A collection of: Benchmark-IT, Profile-IT, Line-Memory-Profile-IT, Disassemble-IT.)
 
    - `<https://github.com/peter1000/PySpeedIT>`_
 
-- flake8 >= 2.2.3  (modular source code checker: pep8, pyflakes and Ned Batchelder's McCabe script)
+- flake8 >= 2.2.5  (modular source code checker: pep8, pyflakes and Ned Batchelder's McCabe script)
 
    - `<http://bitbucket.org/tarek/flake8>`_
 

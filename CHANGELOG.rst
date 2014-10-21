@@ -4,6 +4,27 @@ Release History
 
 .. _whats-new:
 
+Version 2.0.3     2014-10-21
+============================
+
+Features:
+---------
+
+   - changed: :py:func:`JqPyCharts.main_code.jqpc_simple_bar_chart`
+   
+      - for horizontal bar chars: switched the order of bars which is now the same as the `chart_data_matrix`
+
+
+Fixes/Other Changes:
+--------------------
+
+   - updated requirement:
+
+      - PSphinxTheme>=2.0.3
+
+   - updated Required Software
+
+
 Version 2.0.2     2014-10-04
 ============================
 
@@ -13,11 +34,11 @@ Fixes/Other Changes:
    - updated requirement:
 
       - PSphinxTheme>=2.0.1
-      
+
    - updated Required Software
-      
+
    - updated: updated docs: Projects using JqPyCharts
-   
+
 
 Version 2.0.1     2014-10-01
 ============================

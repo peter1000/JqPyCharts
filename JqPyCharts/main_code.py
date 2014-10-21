@@ -752,12 +752,18 @@ def jqpc_simple_bar_chart(
    :return: (tuple) js_css_resources_header, jqplotchart_script, html_chart_insert_tag
    :raise Err:
    """
+
+   print('\n\n========jqpc_simple_bar_chart: source_dir_path: <{}>'.format(source_dir_path))
    if chart_x_label_fontdict is None:
       chart_x_label_fontdict = {'fontFamily': 'Helvetica', 'fontSize': 14, 'textColor': '#000000'}
    if chart_ticks_fontdict is None:
       chart_ticks_fontdict = {'fontFamily': 'Courier New', 'fontSize': 12, 'textColor': '#000000'}
 
-   chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in chart_data_matrix]
+   if horizontal:
+      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)]
+   else:
+      chart_legends = [series_legend_text for series_name, series_value, series_color, series_legend_text in chart_data_matrix]
+
    if None in chart_legends:
       raise Err('jqpc_simple_bar_chart', ['<SeriesLegendText> may not be <None>. We got: <{}>'.format(chart_legends)])
 
@@ -786,12 +792,21 @@ def jqpc_simple_bar_chart(
 
    js_css_resources_header = (jqpc_get_html_js_css_resources(needed_resources, source_dir_path, indent='      '))
 
-   extra_variables_lines_dict = {
-      'chart_data': [series_value for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
-      'chart_colors': [series_color for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
-      'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
-      'chart_legends': chart_legends
-   }
+   if horizontal:
+      extra_variables_lines_dict = {
+         'chart_data': [series_value for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
+         'chart_colors': [series_color for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
+         'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in reversed(chart_data_matrix)],
+         'chart_legends': chart_legends
+      }
+   else:
+      extra_variables_lines_dict = {
+         'chart_data': [series_value for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
+         'chart_colors': [series_color for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
+         'chart_ticks': [series_name for series_name, series_value, series_color, series_legend_text in chart_data_matrix],
+         'chart_legends': chart_legends
+      }
+
 
    jqplot_options_lines = []
    jqplot_options_lines.append("""
